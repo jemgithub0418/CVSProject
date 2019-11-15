@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load phone_numbers_extra %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-10 col-12">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% if user.is_staff == True %}
+          <div class="form-group">
+                <fieldset>
+                    <legend>Profile Info</legend>
+                    {{ profile_form.employee_number|as_crispy_field}}
+                    {{ user_form.email|as_crispy_field}}
+                    {{ profile_form.mobile_number|as_crispy_field}}
+                    {{ user_form.first_name|as_crispy_field}}
+                    {{ user_form.middle_name|as_crispy_field}}
+                    {{ user_form.last_name|as_crispy_field}}
+                    {{ profile_form.address|as_crispy_field }}
+
+                </fieldset>
+                <fieldset>
+                    <legend>Log In Credentials</legend>
+                    {{ user_form.username|as_crispy_field}}
+                    <a href="{% url 'password_reset' %}">Reset Password</a>
+                    <br>
+                    <br>
+                </fieldset>
+              <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+          {% else %}
+          <div class="form-group">
+                <fieldset>
+                    <legend>Profile Info</legend>
+                    <br>
+                    My LRN: {{ request.user.user_studentprofile.lrn }}
+                    <br><br>
+                    {{ user_form.email|as_crispy_field}}
+                    {{ user_form.first_name|as_crispy_field}}
+                    {{ user_form.middle_name|as_crispy_field}}
+                    {{ user_form.last_name|as_crispy_field}}
+                    {{ profile_form.landline_number|as_crispy_field }}
+                    {{ profile_form.mobile_number|as_crispy_field }}
+                    {{ profile_form.address|as_crispy_field}}
+                    {{ profile_form.mothers_name|as_crispy_field}}
+                    {{ profile_form.fathers_name|as_crispy_field }}
+                    {{profile_form.contact_person_name | as_crispy_field }}
+                    {{profile_form.contact_person_number | as_crispy_field }}
+                </fieldset>
+                <fieldset>
+                    <legend>Log In Credentials</legend>
+                    {{ user_form.username|as_crispy_field}}
+                    <a href="{% url 'password_reset' %}">Reset Password</a>
+                    <br>
+                    <br>
+                </fieldset>
+              <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+          {% endif %}
+
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

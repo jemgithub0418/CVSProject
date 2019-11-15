@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="container">
+    {% if user.is_superuser == True %}
+
+  <div class="row">
+    <div class="col-md-8 col-sm-10 col-12">
+      <h2>Add new Staff </h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="form-group">
+            <br>
+            <h5>Personal Info</h5>
+            <hr>
+            {{ profileform.employee_number|as_crispy_field}}
+            {{ form.email|as_crispy_field}}
+            {{ form.first_name|as_crispy_field}}
+            {{ form.middle_name|as_crispy_field}}
+            {{ form.last_name|as_crispy_field}}
+            {{ profileform.mobile_number|as_crispy_field }}
+            {{ form.user_level|as_crispy_field}}
+            <hr><br>
+            <h5>Login Credentials</h5>
+            <hr>
+            {{ form.username|as_crispy_field}}
+            {{ form.password1|as_crispy_field}}
+            {{ form.password2|as_crispy_field}}
+            <hr>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% else %}
+
+  <p>You are not allowed to view this page.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

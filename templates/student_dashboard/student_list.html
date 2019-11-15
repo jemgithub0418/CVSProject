@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">Student Number(LRN)</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Year Level</th>
+            <th scope="col">Section</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for s in sprofile %}
+          <tr>
+            <th scope="row">{{s.lrn}}</th>
+            <td><a href=" {% url 'student-grade' s.user.id %} ">{{s.user.last_name}}, {{s.user.first_name}}</a></td>
+
+            <td>{{s.year}}</td>
+            <td>{{s.section}}</td>
+          </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

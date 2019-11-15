@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {% if user.is_registrar == True %}
+        <h4>Signed in as a Registrar.</h4>
+    {% elif user.is_teacher == True %}
+        <h4>Signed in as a Teacher</h4>
+    {% elif user.is_superuser == True %}
+        <h4>Signed in as an Administrator</h4>
+    {% elif user.is_student == True %}
+        <h4>Signed in as a Student</h4>
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+<!-- {% if messages %}
+<ul class="messagelist">{% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+{% endfor %}</ul>
+{% endif %} -->
