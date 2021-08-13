@@ -16,6 +16,46 @@
   </div>
 </header>
 
+<div>
+    <p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-bs-target
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  </div>
+</div>
+</div>
+
+
+<div>
+
+    {% for student in students %}
+    <p>
+      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="{{forloop.counter}}" aria-expanded="false" aria-controls="collapseExample">
+        {{student.student}}
+      </button>
+    </p>
+    <div class="collapse" id="{{forloop.counter}}">
+      <div class="card card-body">
+        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+      </div>
+    </div>
+        
+    {% endfor %}
+    <form>  
+            {{form.as_p}}
+    </form>   
+</div>
+
+<script type="text/javascript">
+    
+</script>
 <!-- About Section -->
 <section id="#" class="about-section text-center">
   <div class="container">
@@ -31,6 +71,8 @@
 </section>
 
 <!-- Projects Section -->
+
+
 <section id="news" class="projects-section bg-light">
   <div class="container">
 

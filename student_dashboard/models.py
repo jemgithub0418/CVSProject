@@ -57,3 +57,11 @@ class StudentGrade(models.Model):
     period = models.CharField(choices=PERIOD_CHOICES, max_length=25)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING, null=True,)
     grade = models.DecimalField(max_digits=4, decimal_places=2)
+
+
+class Student(models.Model):
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to= Q(is_student=True), on_delete= models.CASCADE)
+    enrolled_subject = models.ManyToManyField(Subject)
+
+    def __str__(self):
+        return f'{self.student.first_name} {self.student.last_name}'

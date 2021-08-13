@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (YearLevel, Section, Subject, StudentGrade)
+from .models import (YearLevel, Section, Subject, StudentGrade, Student )
 from accounts.models import User
 
 
@@ -18,3 +18,4 @@ admin.site.register(YearLevel)
 admin.site.register(Section)
 admin.site.register(Subject)
 admin.site.register(StudentGrade, StudentGradeAdmin)
+admin.site.register(Student)

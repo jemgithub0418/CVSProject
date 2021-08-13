@@ -13,16 +13,42 @@ from django.db.models import Q
 from verseoftheday.models import VerseOfTheDay
 from announcement.models import Announcement
 User = get_user_model()
-
+from admin_dashboard.forms import AddStudentGradeForm
+from student_dashboard.models import Student, Subject, StudentGrade
 
 def home(request):
     verses = VerseOfTheDay.objects.all()
     news = Announcement.objects.all()
+    student_grade_form = AddStudentGradeForm()
+    students = Student.objects.all().prefetch_related('enrolled_subject')
     context = {
         "verse": verses,
         'news': news,
+        'form': student_grade_form,
+        'students': students,
 
     }
+
+    if request.method == "POST":
+        data = request.POST
+        grade_list = data.getlist('grade')
+        print(grade_list)
+        subject_list = data.getlist('subject')
+        print(subject_list)
+
+        student = User.objects.get(pk= data.get('studentid'))
+        print(data.get('studentid'))
+
+        i=0
+        while i < len(grade_list):
+            enrolled_subject = Subject.objects.get(pk= subject_list[i])
+            new_grade = StudentGrade(user= student, period= data.get('period'), subject= enrolled_subject, grade=grade_list[i])
+            new_grade.save()
+            i+= 1
+
+
+
+
     return render(request, 'home.html', context)
 
 
